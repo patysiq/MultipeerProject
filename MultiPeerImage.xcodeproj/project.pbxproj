@@ -17,6 +17,7 @@
 		7B09201B2A69B74A00ADD584 /* MultiPeerImageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09201A2A69B74A00ADD584 /* MultiPeerImageUITests.swift */; };
 		7B09201D2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09201C2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift */; };
 		7B7F5CDE2A85049600429DE0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F5CDD2A85049600429DE0 /* Data.swift */; };
+		7B7F5CE02A851B4F00429DE0 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F5CDF2A851B4F00429DE0 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7B09201C2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerImageUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7B0920292A69BED200ADD584 /* MultiPeerImage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiPeerImage.entitlements; sourceTree = "<group>"; };
 		7B7F5CDD2A85049600429DE0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		7B7F5CDF2A851B4F00429DE0 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +107,8 @@
 				7B0920292A69BED200ADD584 /* MultiPeerImage.entitlements */,
 				7B091FF62A69B74700ADD584 /* AppDelegate.swift */,
 				7B091FFA2A69B74700ADD584 /* ViewController.swift */,
-				7B7F5CDD2A85049600429DE0 /* Data.swift */,
+				7B7F5CE12A851BD700429DE0 /* Resourses */,
 				7B091FFC2A69B74700ADD584 /* Main.storyboard */,
-				7B0920022A69B74900ADD584 /* Assets.xcassets */,
 				7B0920042A69B74900ADD584 /* LaunchScreen.storyboard */,
 				7B0920072A69B74900ADD584 /* Info.plist */,
 				7B091FFF2A69B74700ADD584 /* MultiPeerImage.xcdatamodeld */,
@@ -130,6 +131,16 @@
 				7B09201C2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift */,
 			);
 			path = MultiPeerImageUITests;
+			sourceTree = "<group>";
+		};
+		7B7F5CE12A851BD700429DE0 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				7B0920022A69B74900ADD584 /* Assets.xcassets */,
+				7B7F5CDD2A85049600429DE0 /* Data.swift */,
+				7B7F5CDF2A851B4F00429DE0 /* UIImage.swift */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B091FFB2A69B74700ADD584 /* ViewController.swift in Sources */,
+				7B7F5CE02A851B4F00429DE0 /* UIImage.swift in Sources */,
 				7B0920012A69B74700ADD584 /* MultiPeerImage.xcdatamodeld in Sources */,
 				7B091FF72A69B74700ADD584 /* AppDelegate.swift in Sources */,
 				7B7F5CDE2A85049600429DE0 /* Data.swift in Sources */,

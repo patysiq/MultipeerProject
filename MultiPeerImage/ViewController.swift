@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AVFoundation
+import Combine
+import Foundation
 import MultipeerConnectivity
 
 enum ImageSource {
@@ -16,21 +19,36 @@ enum ImageSource {
 class ViewController: UICollectionViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var images = [UIImage]()
-    
+    var imageType = ""
+    var imagesDataType = [Data?]()
     var peerID = MCPeerID(displayName: UIDevice.current.name)
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
+    var isHeicSupported: Bool {
+        (CGImageDestinationCopyTypeIdentifiers() as! [String]).contains("public.heic")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Image Share"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
-        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 10
         let connectedPeersButton = UIBarButtonItem(title: "All Devices", style: .plain, target: self, action: #selector(connectedPeers))
-        toolbarItems = [connectedPeersButton]
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        navigationItem.leftBarButtonItems = [addButton, spacer, connectedPeersButton]
+        
+        
+        let pngImageButton = UIBarButtonItem(title: "PNG", style: .plain, target: self, action: #selector(pngConfig))
+        let jpegImageButton = UIBarButtonItem(title: "JPEG", style: .plain, target: self, action: #selector(jpegConfig))
+        let heicImageButton = UIBarButtonItem(title: "HEIC", style: .plain, target: self, action: #selector(heicConfig))
+        
+        toolbarItems = [pngImageButton, jpegImageButton, heicImageButton]
+        
         navigationController?.isToolbarHidden = false
         
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
@@ -51,7 +69,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         }
         
         if let imageName = cell.viewWithTag(1001) as? UILabel {
-            imageName.text = images[indexPath.item].pngData()?.fileExtension
+            imageName.text = imagesDataType[indexPath.item]?.fileExtension
         }
         
         return cell
@@ -95,6 +113,28 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         selectImageFrom(.camera)
     }
     
+    @objc func pngConfig() {
+        title = "PNG Image Share"
+        imageType = "PNG"
+    }
+    
+    @objc func jpegConfig() {
+        title = "JPEG Image Share"
+        imageType = "JPEG"
+    }
+    
+    @objc func heicConfig() {
+        if isHeicSupported {
+            title = "HEIC Image Share"
+            imageType = "HEIC"
+        } else {
+            let ac = UIAlertController(title: "Not supported", message: "Change Format", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            jpegConfig()
+        }
+    }
+    
     func selectImageFrom(_ source: ImageSource) {
         let picker =  UIImagePickerController()
         picker.allowsEditing = true
@@ -112,21 +152,39 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let image = info[.editedImage] as? UIImage else { return }
+        var imageData: Data?
         
         dismiss(animated: true)
         
         images.insert(image, at: 0)
         collectionView.reloadData()
         
-        sendImage(img: image)
+        
+        switch imageType {
+        case "PGN":
+            imageData = image.pngData()
+        case "JPEG":
+            imageData = image.jpegData(compressionQuality: 0.3)
+        case "HEIC":
+            do {
+                imageData = try image.heicData(compressionQuality: 0.3)
+            } catch let error as NSError {
+                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+            
+        default:
+            imageData = image.pngData()
+        }
+        imagesDataType.insert(imageData, at: 0)
+        sendImage(imageData, imageType)
     }
     
-    func sendImage(img: UIImage) {
+    func sendImage(_ imageData: Data?, _ imageFormat: String) {
         guard let mcSession = mcSession else { return }
         if mcSession.connectedPeers.count > 0 {
-            let data = NSKeyedArchiver.archivedData(withRootObject: img, requiringSecureCoding: false)
-            let container: [Any] = [data, type]
-            let item = NSKeyedArchiver.archivedData(withRootObject: container)
+            if let data = imageData {
                 do {
                     try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch let error as NSError {
@@ -134,6 +192,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     present(ac, animated: true)
                 }
+            }
         }
     }
     
@@ -153,9 +212,6 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     }
     
 }
-
-
-
 
 extension ViewController: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -182,6 +238,7 @@ extension ViewController: MCSessionDelegate {
         DispatchQueue.main.async { [weak self] in
             if let image = UIImage(data: data) {
                 self?.images.insert(image, at: 0)
+                self?.imagesDataType.insert(data, at: 0)
                 self?.collectionView.reloadData()
             }
         }
