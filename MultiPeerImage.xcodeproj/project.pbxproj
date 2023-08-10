@@ -16,6 +16,7 @@
 		7B0920112A69B74A00ADD584 /* MultiPeerImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0920102A69B74A00ADD584 /* MultiPeerImageTests.swift */; };
 		7B09201B2A69B74A00ADD584 /* MultiPeerImageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09201A2A69B74A00ADD584 /* MultiPeerImageUITests.swift */; };
 		7B09201D2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09201C2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift */; };
+		7B7F5CDE2A85049600429DE0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F5CDD2A85049600429DE0 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		7B09201A2A69B74A00ADD584 /* MultiPeerImageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerImageUITests.swift; sourceTree = "<group>"; };
 		7B09201C2A69B74A00ADD584 /* MultiPeerImageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerImageUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7B0920292A69BED200ADD584 /* MultiPeerImage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiPeerImage.entitlements; sourceTree = "<group>"; };
+		7B7F5CDD2A85049600429DE0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				7B0920292A69BED200ADD584 /* MultiPeerImage.entitlements */,
 				7B091FF62A69B74700ADD584 /* AppDelegate.swift */,
 				7B091FFA2A69B74700ADD584 /* ViewController.swift */,
+				7B7F5CDD2A85049600429DE0 /* Data.swift */,
 				7B091FFC2A69B74700ADD584 /* Main.storyboard */,
 				7B0920022A69B74900ADD584 /* Assets.xcassets */,
 				7B0920042A69B74900ADD584 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 				7B091FFB2A69B74700ADD584 /* ViewController.swift in Sources */,
 				7B0920012A69B74700ADD584 /* MultiPeerImage.xcdatamodeld in Sources */,
 				7B091FF72A69B74700ADD584 /* AppDelegate.swift in Sources */,
+				7B7F5CDE2A85049600429DE0 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

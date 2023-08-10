@@ -17,8 +17,6 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     
     var images = [UIImage]()
     
-    @IBOutlet weak var imageType: UILabel!
-    
     var peerID = MCPeerID(displayName: UIDevice.current.name)
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
@@ -50,6 +48,10 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         
         if let imageView = cell.viewWithTag(1000) as? UIImageView {
             imageView.image = images[indexPath.item]
+        }
+        
+        if let imageName = cell.viewWithTag(1001) as? UILabel {
+            imageName.text = images[indexPath.item].pngData()?.fileExtension
         }
         
         return cell
@@ -122,7 +124,9 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     func sendImage(img: UIImage) {
         guard let mcSession = mcSession else { return }
         if mcSession.connectedPeers.count > 0 {
-            let data = NSKeyedArchiver.archivedData(withRootObject: img as Any)
+            let data = NSKeyedArchiver.archivedData(withRootObject: img, requiringSecureCoding: false)
+            let container: [Any] = [data, type]
+            let item = NSKeyedArchiver.archivedData(withRootObject: container)
                 do {
                     try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch let error as NSError {
