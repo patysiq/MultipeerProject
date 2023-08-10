@@ -17,33 +17,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gFR-R9-Noe">
-                            <size key="itemSize" width="145" height="145"/>
+                            <size key="itemSize" width="165" height="165"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageView" id="czz-qO-Wrm">
-                                <rect key="frame" x="10" y="10" width="145" height="145"/>
+                                <rect key="frame" x="103.66666666666667" y="10" width="185.33333333333337" height="165"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tbB-o7-Yx0">
-                                    <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="185.33333333333337" height="165"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="41X-Os-BIg">
-                                            <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-eH-Bvh">
+                                            <rect key="frame" x="0.0" y="20" width="185.33333333333334" height="145"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="41X-Os-BIg">
+                                                    <rect key="frame" x="92.666666666666671" y="0.0" width="0.0" height="119.66666666666667"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="145" id="2w6-yh-Ncu"/>
+                                                        <constraint firstAttribute="height" constant="145" id="546-UX-K6R"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5o-bW-Kmi">
+                                                    <rect key="frame" x="5" y="124.66666666666664" width="175.33333333333334" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="145" id="2w6-yh-Ncu"/>
-                                                <constraint firstAttribute="height" constant="145" id="546-UX-K6R"/>
+                                                <constraint firstItem="G5o-bW-Kmi" firstAttribute="leading" secondItem="o5g-eH-Bvh" secondAttribute="leading" constant="5" id="A0y-cV-Jkv"/>
+                                                <constraint firstAttribute="trailing" secondItem="G5o-bW-Kmi" secondAttribute="trailing" constant="5" id="KlY-s9-gc4"/>
+                                                <constraint firstAttribute="bottom" secondItem="G5o-bW-Kmi" secondAttribute="bottom" id="jdA-oK-l1w"/>
                                             </constraints>
-                                        </imageView>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="41X-Os-BIg" firstAttribute="top" secondItem="tbB-o7-Yx0" secondAttribute="top" id="Mbc-Px-6kq"/>
-                                        <constraint firstItem="41X-Os-BIg" firstAttribute="centerY" secondItem="tbB-o7-Yx0" secondAttribute="centerY" id="dbP-Oj-2Cq"/>
-                                        <constraint firstItem="41X-Os-BIg" firstAttribute="centerX" secondItem="tbB-o7-Yx0" secondAttribute="centerX" id="oK0-Fp-PJ8"/>
-                                        <constraint firstItem="41X-Os-BIg" firstAttribute="leading" secondItem="tbB-o7-Yx0" secondAttribute="leading" id="rIE-sR-Fj9"/>
+                                        <constraint firstAttribute="bottom" secondItem="o5g-eH-Bvh" secondAttribute="bottom" id="21d-Bg-RBA"/>
+                                        <constraint firstItem="o5g-eH-Bvh" firstAttribute="top" secondItem="tbB-o7-Yx0" secondAttribute="top" constant="20" symbolic="YES" id="joK-8Q-chY"/>
+                                        <constraint firstAttribute="trailing" secondItem="o5g-eH-Bvh" secondAttribute="trailing" id="qka-bQ-Fa6"/>
+                                        <constraint firstItem="o5g-eH-Bvh" firstAttribute="leading" secondItem="tbB-o7-Yx0" secondAttribute="leading" id="sLU-oi-Pwa"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                             </collectionViewCell>
@@ -54,6 +70,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="aWB-d7-t7Z"/>
+                    <connections>
+                        <outlet property="imageType" destination="G5o-bW-Kmi" id="Mfo-vZ-uav"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfR-2C-1cG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
